@@ -2,8 +2,16 @@ import pandas as pd
 import plotly.express as px
 import streamlit as st
 
+# URL of the raw CSV file on GitHub
+csv_url = 'https://raw.githubusercontent.com/williamliu91/house/main/SydneyHousePrices.csv'
+
+# Load the CSV file into a DataFrame
+@st.cache_data
+def load_data(url):
+    return pd.read_csv(url)
+
 # Load the data
-df = pd.read_csv('SydneyHousePrices.csv')
+df = load_data(csv_url)
 
 # Convert 'Date' to datetime format and extract 'Year'
 df['Date'] = pd.to_datetime(df['Date'])
